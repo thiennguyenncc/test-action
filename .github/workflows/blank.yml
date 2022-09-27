@@ -24,7 +24,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: fregante/setup-git-user@v1
+      - uses: fregante/setup-git-token@v1
         with:
           token: ${{ secrets.TOKEN_CLONE }}
       # Runs a single command using the runners shell
