@@ -24,11 +24,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: fregante/setup-git-token@v1
+      - uses: LuisEnMarroquin/setup-ssh-action@v2.0.0
         with:
-          token: ${{ secrets.TOKEN_CLONE }}
-          name: thiennguyenncc
-          email: thien.nguyenthai@ncc.asia
+          SSHKEY: ${{ secrets.SSH_KEY }}
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: git clone git@github.com:edward-sakamoto/bachelor-backend.git
