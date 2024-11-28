@@ -22,7 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        id: [0,1,2,3,4]
+        id: [0,1,2]
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - uses: actions/checkout@v2
@@ -30,15 +30,32 @@ jobs:
     - name: Test strategy
       run: |
         echo "Strategy ${{ matrix.id }}" >> output_${{ matrix.id }}.txt
-        ls -la
-        mmm=$(cat output_${{ matrix.id }}.txt)
-        echo $mmm
-        echo "output_${{ matrix.id }}=${mmm}" >> "$GITHUB_OUTPUT"
+    
+    - name: Push Artifact
+       uses: actions/upload-artifact@v4
+      with:
+        name: artifact-${{ matrix.id }}
+        path: output_${{ matrix.id }}.txt
+        retention-days: 1
     
   run:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Test
-        run: | 
-          echo '${{ toJSON(needs.build.outputs) }}'
+      - name: Download a single artifact 0
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact-1
+      
+      - name: Download a single artifact 1
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact-1
+
+      - name: Download a single artifact 2
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact-2
+      
+      - name: Result
+        run: ls -la
