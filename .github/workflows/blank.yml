@@ -32,11 +32,11 @@ jobs:
         echo "Strategy ${{ matrix.id }}" >> output_${{ matrix.id }}.txt
     
     - name: Push Artifact
-       uses: actions/upload-artifact@v4
-      with:
-        name: artifact-${{ matrix.id }}
-        path: output_${{ matrix.id }}.txt
-        retention-days: 1
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact-${{ matrix.id }}
+          path: output_${{ matrix.id }}.txt
+          retention-days: 1
     
   run:
     runs-on: ubuntu-latest
