@@ -31,7 +31,9 @@ jobs:
       run: |
         echo "Strategy ${{ matrix.id }}" >> output_${{ matrix.id }}.txt
         ls -la
-        echo "output_${{ matrix.id }}=${cat output_${{ matrix.id }}.txt}" >> "$GITHUB_OUTPUT"
+        mmm=$(cat output_${{ matrix.id }}.txt)
+        echo $mmm
+        echo "output_${{ matrix.id }}=${mmm}" >> "$GITHUB_OUTPUT"
     
   run:
     runs-on: ubuntu-latest
