@@ -29,4 +29,12 @@ jobs:
     
     - name: Test strategy
       run: |
-        echo "Strategy ${{ matrix.id }}"
+        echo "Strategy ${{ matrix.id }}" >> output.txt
+    
+  run:
+    runs-on: ubuntu-latest
+    need: build
+    steps:
+      - name: Test
+        run: | 
+          echo "Test"
