@@ -29,7 +29,9 @@ jobs:
     
     - name: Test strategy
       run: |
-        echo "Strategy ${{ matrix.id }}" >> output.txt
+        echo "Strategy ${{ matrix.id }}" >> output_${{ matrix.id }}.txt
+        ls -la
+        echo "$(cat output_${{ matrix.id }}.txt)" >> "$GITHUB_OUTPUT"
     
   run:
     runs-on: ubuntu-latest
@@ -37,4 +39,4 @@ jobs:
     steps:
       - name: Test
         run: | 
-          echo "Test"
+          echo '${{ toJSON(needs.build.outputs) }}'
